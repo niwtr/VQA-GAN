@@ -1,0 +1,53 @@
+CONFIG_NAME: '01hop_l2_lambda0_EVQAL10.0'
+# CONFIG_NAME: 'test'
+
+DATASET_NAME: 'clevr128'
+DATA_DIR: '../data/clevr128_fix01hop'
+
+SCENE_DIR_NAME: "moformat_scenes_01hop"
+QA_DIR: '../qa_data/clevr128_QA_01hop' # preprocessed QA data dir.
+
+GPU_ID: '0'
+WORKERS: 4
+
+TREE:
+    BRANCH_NUM: 2
+
+TRAIN:
+    FLAG: True
+    NET_G: ''
+    B_NET_D: True
+    BATCH_SIZE:  20 # 64
+    MAX_EPOCH: 150
+    SNAPSHOT_INTERVAL: 5
+    DISCRIMINATOR_LR: 0.0002
+    GENERATOR_LR: 0.0002
+    #
+    NET_E: '../models/DAMSMEncoders/clevr128_01hop/text_encoder200.pth'
+
+    SMOOTH:
+        GAMMA1: 4.0  # 1,2,5 good 4 best  10&100bad
+        GAMMA2: 5.0
+        GAMMA3: 10.0  # 10good 1&100bad
+        LAMBDA: 0.0
+
+    EVQAL:
+      B_EVQAL: True
+      NET: '../models/tbd-nets/clevr128_01hop/clevr-hres-reg-29.pt'
+      BETA: 10.0
+
+      PROGRAM_FILE_NAME: 'questions_01hop.h5'
+      PROGRAM_VOCAB_FILE: '../models/tbd-nets/vocab.json' 
+
+GAN:
+    DF_DIM: 96
+    GF_DIM: 48
+    Z_DIM: 100
+    R_NUM: 3
+    B_CA_NET: False
+    LABEL_DIM: 4
+
+TEXT:
+    EMBEDDING_DIM: 256
+    WORDS_NUM: 25 # 12
+    MAX_QA_NUM: 20

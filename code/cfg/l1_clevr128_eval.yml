@@ -1,0 +1,36 @@
+CONFIG_NAME: '' # you can leave this empty in testing mode.
+DATASET_NAME: 'clevr128'
+DATA_DIR: '../data/clevr128_fix01hop'
+SCENE_DIR_NAME: "moformat_scenes_01hop"
+QA_DIR: '../qa_data/clevr128_QA_01hop' # preprocessed QA data dir.
+SAMPLING_SPLIT: 'test'
+SAMPLING_TYPE: 'normal' # normal, or visualization 
+
+GPU_ID: '0'
+WORKERS: 4
+
+TREE:
+    BRANCH_NUM: 2
+
+TRAIN:
+    FLAG: False
+    NET_G: '../pretrained/clevr128_01hop_l1_EVQAL10/checkpoint_0149.pth'
+    B_NET_D: True
+    BATCH_SIZE:  64
+    #
+    NET_E: '../models/DAMSMEncoders/l1_clevr128_01hop/qa_encoder200.pth'
+    EVQAL:
+      B_EVQAL: False
+
+GAN:
+    DF_DIM: 96
+    GF_DIM: 48
+    Z_DIM: 100
+    R_NUM: 3
+    B_CA_NET: False
+    LABEL_DIM: 4
+
+TEXT:
+    EMBEDDING_DIM: 256
+    WORDS_NUM: 25 # 12
+    MAX_QA_NUM: 20

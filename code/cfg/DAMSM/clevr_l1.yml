@@ -1,0 +1,35 @@
+CONFIG_NAME: 'DAMSM_clevr_l1_01hop'
+
+DATASET_NAME: 'clevr128'
+DATA_DIR: '../data/clevr128_fix01hop'
+SCENE_DIR_NAME: "moformat_scenes_01hop"
+QA_DIR: '../qa_data/clevr128_QA_01hop' # preprocessed QA data dir.
+
+GPU_ID: '0'
+WORKERS: 1
+
+
+TREE:
+    BRANCH_NUM: 1
+    BASE_SIZE: 299 # NOTE this is immutable, isn't it?
+
+
+TRAIN:
+    FLAG: True
+    NET_E: ''
+    BATCH_SIZE: 48
+    MAX_EPOCH: 600
+    SNAPSHOT_INTERVAL: 50
+    ENCODER_LR: 0.0002  # 0.0002best; 0.002good; scott: 0.0007 with 0.98decay
+    # 0.002 old
+    RNN_GRAD_CLIP: 0.25
+    SMOOTH:
+        GAMMA1: 4.0  # 1,2,5 good 4 best  10&100bad
+        GAMMA2: 5.0
+        GAMMA3: 10.0  # 10good 1&100bad
+
+TEXT:
+    EMBEDDING_DIM: 256
+    WORDS_NUM: 25 # 12
+    MAX_QA_NUM: 20
+    
